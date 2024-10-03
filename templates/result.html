@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraped Data Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Scraped Data</h1>
+
+        <!-- Images Section -->
+        {% if display_type == 'images' or display_type == 'all' %}
+        <section>
+            <h2>Images</h2>
+            <div class="image-grid">
+                {% for img in data.images %}
+                    <img src="{{ img }}" alt="Image">
+                {% else %}
+                    <p>No images found.</p>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %} <!-- Make sure this block is closed -->
+
+        <!-- Links Section -->
+        {% if display_type == 'links' or display_type == 'all' %}
+        <section>
+            <h2>Links</h2>
+            <ul>
+                {% for link in data.links %}
+                    <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+                {% else %}
+                    <p>No links found.</p>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %} <!-- Make sure this block is closed -->
+
+        <!-- Favicons Section -->
+        {% if display_type == 'favicons' or display_type == 'all' %}
+        <section>
+            <h2>Favicons</h2>
+            <ul>
+                {% for favicon in data.favicons %}
+                    <li><a href="{{ favicon }}" target="_blank">{{ favicon }}</a></li>
+                {% else %}
+                    <p>No favicons found.</p>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %} <!-- Make sure this block is closed -->
+
+        <!-- Stylesheets Section -->
+        {% if display_type == 'stylesheets' or display_type == 'all' %}
+        <section>
+            <h2>Stylesheets</h2>
+            <ul>
+                {% for stylesheet in data.stylesheets %}
+                    <li><a href="{{ stylesheet }}" target="_blank">{{ stylesheet }}</a></li>
+                {% else %}
+                    <p>No stylesheets found.</p>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %} <!-- Make sure this block is closed -->
+
+        <!-- Scripts Section -->
+        {% if display_type == 'scripts' or display_type == 'all' %}
+        <section>
+            <h2>Scripts</h2>
+            <ul>
+                {% for script in data.scripts %}
+                    <li><a href="{{ script }}" target="_blank">{{ script }}</a></li>
+                {% else %}
+                    <p>No scripts found.</p>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %} <!-- Make sure this block is closed -->
+
+        <!-- Headings Section -->
+        {% if display_type == 'headings' or display_type == 'all' %}
+        <section>
+            <h2>Headings</h2>
+            <ul>
+                {% for level, headings in data.headings.items() %}
+                    <h3>{{ level | upper }} Headings</h3>
+                    {% for heading in headings %}
+                        <li>{{ heading }}</li>
+                    {% else %}
+                        <p>No {{ level }} headings found.</p>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %} <!-- Make sure this block is closed -->
+
+        <!-- Meta Tags Section -->
+        {% if display_type == 'meta_tags' or display_type == 'all' %}
+        <section>
+            <h2>Meta Tags</h2>
+            <ul>
+                {% for meta in data.meta_tags %}
+                    <li>{{ meta }}</li>
+                {% else %}
+                    <p>No meta tags found.</p>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %} <!-- Make sure this block is closed -->
+
+        <!-- Back button -->
+        <a href="/" class="button">Go Back</a>
+    </div>
+</body>
+</html>

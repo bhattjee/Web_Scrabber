@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Website Scraper</h1>
+        
+        <!-- Form to input URL, search term, and data type -->
+        <form action="/scrape" method="POST">
+            <label for="url">Enter website URL:</label>
+            <input type="url" id="url" name="url" required placeholder="https://example.com">
+            
+            <label for="selection">Select Data to Scrape:</label>
+            <select name="selection" id="selection" required>
+                <option value="images">Images</option>
+                <option value="links">Links</option>
+                <option value="favicons">Favicons</option>
+                <option value="stylesheets">Stylesheets</option>
+                <option value="scripts">Scripts</option>
+                <option value="headings">Headings</option>
+                <option value="meta_tags">Meta Tags</option>
+                <option value="all">All Data</option>
+            </select>
+            
+            <!-- Search bar for finding specific words -->
+            <label for="search-term">Search for a specific word (optional):</label>
+            <input type="text" id="search-term" name="search_term" placeholder="Enter search term...">
+            
+            <button type="submit">Scrape</button>
+        </form>
+    </div>
+</body>
+</html>
