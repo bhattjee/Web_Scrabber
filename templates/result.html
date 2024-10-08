@@ -1,118 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scraped Data Results</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+    <!-- Link to external CSS file for styling -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
     <div class="container">
-        <h1>Scraped Data</h1>
+      <h1>Scraped Data Results</h1>
 
-        <!-- Images Section -->
-        {% if display_type == 'images' or display_type == 'all' %}
-        <section>
-            <h2>Images</h2>
-            <div class="image-grid">
-                {% for img in data.images %}
-                    <img src="{{ img }}" alt="Image">
-                {% else %}
-                    <p>No images found.</p>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %} <!-- Make sure this block is closed -->
+      <!-- If a search term was used, display it at the top of the results page -->
+      {% if search_term %}
+      <h2>Results for: "{{ search_term }}"</h2>
+      {% endif %}
 
-        <!-- Links Section -->
-        {% if display_type == 'links' or display_type == 'all' %}
-        <section>
-            <h2>Links</h2>
-            <ul>
-                {% for link in data.links %}
-                    <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
-                {% else %}
-                    <p>No links found.</p>
-                {% endfor %}
-            </ul>
-        </section>
-        {% endif %} <!-- Make sure this block is closed -->
+      <!-- Images Section -->
+      <!-- Display images if the user selected 'images' or 'all' -->
+      {% if display_type == 'images' or display_type == 'all' %}
+      <section>
+        <h2>Images</h2>
+        <div class="image-grid">
+          <!-- Loop through all image URLs and display each one -->
+          {% for img in data.images %}
+          <img src="{{ img }}" alt="Image" />
+          <!-- If no images are found, show a fallback message -->
+          {% else %}
+          <p>No images found.</p>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
 
-        <!-- Favicons Section -->
-        {% if display_type == 'favicons' or display_type == 'all' %}
-        <section>
-            <h2>Favicons</h2>
-            <ul>
-                {% for favicon in data.favicons %}
-                    <li><a href="{{ favicon }}" target="_blank">{{ favicon }}</a></li>
-                {% else %}
-                    <p>No favicons found.</p>
-                {% endfor %}
-            </ul>
-        </section>
-        {% endif %} <!-- Make sure this block is closed -->
+      <!-- Links Section -->
+      <!-- Display links if the user selected 'links' or 'all' -->
+      {% if display_type == 'links' or display_type == 'all' %}
+      <section>
+        <h2>Links</h2>
+        <div class="link-grid">
+          <!-- Loop through all the found links -->
+          {% for link in data.links %}
+          <div class="link-item">
+            <!-- Display the search term as the link name (optional), followed by the actual link -->
+            <strong>{{ search_term }}</strong><br />
+            <a href="{{ link }}" target="_blank">{{ link }}</a>
+          </div>
+          <!-- If no links are found, show a fallback message -->
+          {% else %}
+          <p>No links found.</p>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
 
-        <!-- Stylesheets Section -->
-        {% if display_type == 'stylesheets' or display_type == 'all' %}
-        <section>
-            <h2>Stylesheets</h2>
-            <ul>
-                {% for stylesheet in data.stylesheets %}
-                    <li><a href="{{ stylesheet }}" target="_blank">{{ stylesheet }}</a></li>
-                {% else %}
-                    <p>No stylesheets found.</p>
-                {% endfor %}
-            </ul>
-        </section>
-        {% endif %} <!-- Make sure this block is closed -->
+      <!-- Favicons Section -->
+      <!-- Display favicons if the user selected 'favicons' or 'all' -->
+      {% if display_type == 'favicons' or display_type == 'all' %}
+      <section>
+        <h2>Favicons</h2>
+        <ul>
+          <!-- Loop through all found favicon URLs and display each one -->
+          {% for favicon in data.favicons %}
+          <li><a href="{{ favicon }}" target="_blank">{{ favicon }}</a></li>
+          <!-- If no favicons are found, show a fallback message -->
+          {% else %}
+          <p>No favicons found.</p>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
 
-        <!-- Scripts Section -->
-        {% if display_type == 'scripts' or display_type == 'all' %}
-        <section>
-            <h2>Scripts</h2>
-            <ul>
-                {% for script in data.scripts %}
-                    <li><a href="{{ script }}" target="_blank">{{ script }}</a></li>
-                {% else %}
-                    <p>No scripts found.</p>
-                {% endfor %}
-            </ul>
-        </section>
-        {% endif %} <!-- Make sure this block is closed -->
+      <!-- Stylesheets Section -->
+      <!-- Display stylesheets if the user selected 'stylesheets' or 'all' -->
+      {% if display_type == 'stylesheets' or display_type == 'all' %}
+      <section>
+        <h2>Stylesheets</h2>
+        <ul>
+          <!-- Loop through all found stylesheet URLs and display each one -->
+          {% for stylesheet in data.stylesheets %}
+          <li><a href="{{ stylesheet }}" target="_blank">{{ stylesheet }}</a></li>
+          <!-- If no stylesheets are found, show a fallback message -->
+          {% else %}
+          <p>No stylesheets found.</p>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
 
-        <!-- Headings Section -->
-        {% if display_type == 'headings' or display_type == 'all' %}
-        <section>
-            <h2>Headings</h2>
-            <ul>
-                {% for level, headings in data.headings.items() %}
-                    <h3>{{ level | upper }} Headings</h3>
-                    {% for heading in headings %}
-                        <li>{{ heading }}</li>
-                    {% else %}
-                        <p>No {{ level }} headings found.</p>
-                    {% endfor %}
-                {% endfor %}
-            </ul>
-        </section>
-        {% endif %} <!-- Make sure this block is closed -->
+      <!-- Scripts Section -->
+      <!-- Display scripts if the user selected 'scripts' or 'all' -->
+      {% if display_type == 'scripts' or display_type == 'all' %}
+      <section>
+        <h2>Scripts</h2>
+        <ul>
+          <!-- Loop through all found script URLs and display each one -->
+          {% for script in data.scripts %}
+          <li><a href="{{ script }}" target="_blank">{{ script }}</a></li>
+          <!-- If no scripts are found, show a fallback message -->
+          {% else %}
+          <p>No scripts found.</p>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
 
-        <!-- Meta Tags Section -->
-        {% if display_type == 'meta_tags' or display_type == 'all' %}
-        <section>
-            <h2>Meta Tags</h2>
-            <ul>
-                {% for meta in data.meta_tags %}
-                    <li>{{ meta }}</li>
-                {% else %}
-                    <p>No meta tags found.</p>
-                {% endfor %}
-            </ul>
-        </section>
-        {% endif %} <!-- Make sure this block is closed -->
+      <!-- Headings Section -->
+      <!-- Display headings if the user selected 'headings' or 'all' -->
+      {% if display_type == 'headings' or display_type == 'all' %}
+      <section>
+        <h2>Headings</h2>
+        <ul>
+          <!-- Loop through all heading levels (h1 to h6) -->
+          {% for level, headings in data.headings.items() %}
+          <h3>{{ level | upper }} Headings</h3>
+          <!-- Loop through all headings of the current level -->
+          {% for heading in headings %}
+          <li>{{ heading }}</li>
+          <!-- If no headings are found for the current level, show a fallback message -->
+          {% else %}
+          <p>No {{ level }} headings found.</p>
+          {% endfor %}
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
 
-        <!-- Back button -->
-        <a href="/" class="button">Go Back</a>
+      <!-- Meta Tags Section -->
+      <!-- Display meta tags if the user selected 'meta_tags' or 'all' -->
+      {% if display_type == 'meta_tags' or display_type == 'all' %}
+      <section>
+        <h2>Meta Tags</h2>
+        <ul>
+          <!-- Loop through all found meta tags and display each one -->
+          {% for meta in data.meta_tags %}
+          <li>{{ meta }}</li>
+          <!-- If no meta tags are found, show a fallback message -->
+          {% else %}
+          <p>No meta tags found.</p>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      <!-- Go Back button to return to the home page -->
+      <a href="/" class="button go-back-button">Go Back</a>
     </div>
-</body>
+  </body>
 </html>

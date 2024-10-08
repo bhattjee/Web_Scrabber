@@ -171,3 +171,98 @@ body.result-page {
     width: 20px;
     height: 20px;
 }
+.link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted width for more space */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.link-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    word-wrap: break-word; /* Ensures long links wrap to the next line */
+}
+
+.link-item a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.link-item a:hover {
+    text-decoration: underline;
+}
+
+.link-item strong {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+.go-back-button {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 20px 0; /* Ensure spacing between content and button */
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.go-back-button:hover {
+    background-color: #0056b3;
+}
+.container {
+    position: relative; /* Ensure the container can position child elements */
+    padding-bottom: 60px; /* Add padding at the bottom to avoid overlap with the button */
+}
+.link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust grid size */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.domain-group {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.domain-group h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.domain-group ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.domain-group li {
+    margin-bottom: 5px;
+}
+
+.domain-group a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.domain-group a:hover {
+    text-decoration: underline;
+}
+
+

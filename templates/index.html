@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Scraper</title>
+    <!-- Link to external CSS file for styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -12,9 +13,11 @@
         
         <!-- Form to input URL, search term, and data type -->
         <form action="/scrape" method="POST">
+            <!-- Input field for the user to enter the website URL -->
             <label for="url">Enter website URL:</label>
             <input type="url" id="url" name="url" required placeholder="https://example.com">
             
+            <!-- Dropdown selection for the type of data to scrape -->
             <label for="selection">Select Data to Scrape:</label>
             <select name="selection" id="selection" required>
                 <option value="images">Images</option>
@@ -27,10 +30,11 @@
                 <option value="all">All Data</option>
             </select>
             
-            <!-- Search bar for finding specific words -->
+            <!-- Input field for an optional search term -->
             <label for="search-term">Search for a specific word (optional):</label>
             <input type="text" id="search-term" name="search_term" placeholder="Enter search term...">
             
+            <!-- Submit button to start the scraping process -->
             <button type="submit">Scrape</button>
         </form>
     </div>
